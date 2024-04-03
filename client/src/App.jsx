@@ -1,7 +1,23 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import DashBoard from "./pages/DashBoard";
+import Projects from "./pages/Projects";
 function App() {
   return (
     <>
-      <h1 className="bg-red-900 text-white">hello World</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/about" element={<About></About>}></Route>
+          <Route path="/signup" element={<Signup></Signup>}></Route>
+          <Route path="/signin" element={<Signin></Signin>}></Route>
+          <Route path="/dashboard" element={<DashBoard></DashBoard>}></Route>
+          <Route path="/projects" element={<Projects></Projects>}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
