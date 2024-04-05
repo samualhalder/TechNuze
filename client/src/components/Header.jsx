@@ -1,4 +1,4 @@
-import { Navbar, TextInput } from "flowbite-react";
+import { Navbar, TextInput, Button } from "flowbite-react";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
@@ -10,7 +10,7 @@ function Header() {
     <Navbar className="border-b-2 ">
       <Link
         to={"/"}
-        className="whitespace-nowrap text-sm sm:text-lg self-center "
+        className="whitespace-nowrap text-sm sm:text-lg self-center"
       >
         <span className="p-2 bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-400 text-white rounded-lg">
           Samual's
@@ -34,20 +34,23 @@ function Header() {
           <HiMoon className="mx-auto" />
         </button>
         <Link to={"/signin"}>
-          <button className="h-10 p-2 rounded-lg mx-2 bg-gradient-to-r from-purple-600 to-blue-600 shadow-lg text-white">
+          <Button
+            className="h-10  rounded-lg mx-2 bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg text-white"
+            outline
+          >
             Sign in
-          </button>
+          </Button>
         </Link>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link active={path === "/"} as={'div'}>
+        <Navbar.Link active={path === "/"} as={"div"}>
           <Link to={"/"}>Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/about"} as={'div'}>
+        <Navbar.Link active={path === "/about"} as={"div"}>
           <Link to={"/about"}>About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/projects"} as={'div'}>
+        <Navbar.Link active={path === "/projects"} as={"div"}>
           <Link to={"/projects"}>Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>
