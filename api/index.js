@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 console.log(process.env.PORT);
-
+//conected to database
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
@@ -16,6 +16,11 @@ mongoose
   });
 
 const app = express();
+
+
+app.get('/',(req,res)=>{
+  res.send('hello')
+})
 app.listen(process.env.PORT, () => {
   console.log("server started!!!");
 });
