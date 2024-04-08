@@ -2,9 +2,11 @@ import { log } from "console";
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import userRout from "./routs/user.rout.js";
 
+const app = express();
 dotenv.config();
-console.log(process.env.PORT);
+
 //conected to database
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -15,12 +17,8 @@ mongoose
     console.log(err);
   });
 
-const app = express();
+app.use("/api/user", userRout);
 
-
-app.get('/',(req,res)=>{
-  res.send('hello')
-})
 app.listen(process.env.PORT, () => {
   console.log("server started!!!");
 });
