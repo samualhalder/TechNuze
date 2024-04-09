@@ -18,9 +18,19 @@ mongoose
     console.log(err);
   });
 
+app.listen(process.env.PORT, () => {
+  console.log("server started!!!");
+});
+
 app.use("/api/user", userRout);
 app.use("/api/auth", authRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log("server started!!!");
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const errMessege = err.message || "Interanl server error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    errMessege,
+  });
 });
