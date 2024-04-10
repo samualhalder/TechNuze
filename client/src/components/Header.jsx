@@ -13,9 +13,9 @@ function Header() {
         className="whitespace-nowrap text-sm sm:text-lg self-center"
       >
         <span className="p-2 bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-400 text-white rounded-lg">
-          Samual's
+          Blog
         </span>
-        Blog
+        365
       </Link>
       <form action="">
         <TextInput
