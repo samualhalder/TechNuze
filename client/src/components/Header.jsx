@@ -1,5 +1,4 @@
 import { Navbar, TextInput, Button } from "flowbite-react";
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { HiMoon } from "react-icons/hi2";
@@ -13,7 +12,7 @@ function Header() {
         className="whitespace-nowrap text-sm sm:text-lg self-center"
       >
         <span className="p-2 bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-400 text-white rounded-lg">
-          Blog
+          CodeBlogs
         </span>
         365
       </Link>

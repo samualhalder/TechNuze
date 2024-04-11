@@ -22,7 +22,7 @@ export const signUp = async (req, res, next) => {
   await newUser
     .save()
     .then((msg) => {
-      res.json({ message: "signup working" });
+      res.json({ message: "signup working." });
     })
     .catch((err) => {
       next(err);
