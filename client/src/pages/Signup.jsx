@@ -9,7 +9,7 @@ function Signup() {
   const navigate = useNavigate();
   // const navigate=useNavigate()
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,15 +29,14 @@ function Signup() {
         return setErrorMessage(data.errMessege);
       }
       setLoading(false);
-      if(response.ok){
-        navigate('/signin')
+      if (response.ok) {
+        navigate("/signin");
       }
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
-  console.log(formData);
+
   return (
     <div className="min-h-screen mt-20 ">
       <div className="flex p-4 max-w-3xl mx-auto flex-col md:flex-row md:items-center">
