@@ -1,11 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFail,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 
 function Signin() {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.user.loading);
+  const error = useSelector((state) => state.user.error);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // const navigate=useNavigate()
   const handleChange = (e) => {
@@ -14,11 +21,10 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrorMessage("please enter all fileds");
+      dispatch(signInFail("pls enter all the fields"));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const response = await fetch("/api/auth/signin", {
         method: "POST",
         headers: { "content-Type": "application/json" },
@@ -27,15 +33,15 @@ function Signin() {
       const data = await response.json();
 
       if (data.success === false) {
-        setLoading(false);
-        return setErrorMessage(data.errMessege);
+        dispatch(signInFail(data.errMessege));
       }
-      setLoading(false);
+
       if (response.ok) {
+        dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      setLoading(false);
+      dispatch(signInFail(error.message));
     }
   };
 
@@ -93,9 +99,7 @@ function Signin() {
                 "Sign In"
               )}
             </Button>
-            {errorMessage && (
-              <Alert className=" bg-red-400 text-white">{errorMessage}</Alert>
-            )}
+            {error && <Alert className=" bg-red-400 text-white">{error}</Alert>}
           </form>
           <span className="m-10 text-sm">
             Dont have an account?{"  "}
