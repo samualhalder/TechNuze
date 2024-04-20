@@ -1,10 +1,21 @@
-import { Navbar, TextInput, Button } from "flowbite-react";
+import {
+  Navbar,
+  TextInput,
+  Button,
+  Dropdown,
+  Avatar,
+  DropdownHeader,
+} from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { HiMoon } from "react-icons/hi2";
+import { useSelector } from "react-redux";
+import DashBoard from "../pages/DashBoard";
 
 function Header() {
   const path = useLocation().pathname;
+  const currentUser = useSelector((state) => state.user);
+
   return (
     <Navbar className="border-b-2 ">
       <Link
@@ -32,14 +43,43 @@ function Header() {
         <button className="w-12 h-10 rounded-lg hidden sm:inline bg-gray-50">
           <HiMoon className="mx-auto" />
         </button>
-        <Link to={"/signin"}>
-          <Button
-            className="h-10  rounded-lg mx-2 bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg text-white"
-            outline
+        {currentUser.currentUser !== null ? (
+          <Dropdown
+            inline
+            arrowIcon={false}
+            label={
+              <Avatar
+                alt="user"
+                img={currentUser.currentUser.photoURL}
+                rounded
+              />
+            }
           >
-            Sign in
-          </Button>
-        </Link>
+            <Dropdown.Header>
+              <span className="block text-sm truncate">
+                @{currentUser.currentUser.username}
+              </span>
+              <span className="text-bold font-medium truncate">
+                {currentUser.currentUser.email}
+              </span>
+            </Dropdown.Header>
+            <Link to={"/dashboard?tab=profile"}>
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
+            <Dropdown.Divider />
+            <Dropdown.Item>Sign Out</Dropdown.Item>
+          </Dropdown>
+        ) : (
+          <Link to={"/signin"}>
+            <Button
+              className="h-10  rounded-lg mx-2 bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg text-white"
+              outline
+            >
+              Sign in
+            </Button>
+          </Link>
+        )}
+
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
