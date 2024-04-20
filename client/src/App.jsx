@@ -6,7 +6,7 @@ import Signin from "./pages/Signin";
 import DashBoard from "./pages/DashBoard";
 import Projects from "./pages/Projects";
 import Header from "./components/Header";
-import FooterComp from "./pages/FooterComp";
+import FooterComp from "./components/FooterComp";
 function App() {
   return (
     <>

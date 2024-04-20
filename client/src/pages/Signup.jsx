@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
+import OAuth from "../components/OAuth";
 
 function Signup() {
   const [formData, setFormData] = useState({});
@@ -103,6 +104,7 @@ function Signup() {
             {errorMessage && (
               <Alert className=" bg-red-400 text-white">{errorMessage}</Alert>
             )}
+            <OAuth />
           </form>
           <span className="m-10 text-sm">
             Have an account?{"  "}

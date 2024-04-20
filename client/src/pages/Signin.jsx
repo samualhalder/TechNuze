@@ -7,6 +7,7 @@ import {
   signInStart,
   signInSuccess,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 function Signin() {
   const [formData, setFormData] = useState({});
@@ -100,6 +101,7 @@ function Signin() {
               )}
             </Button>
             {error && <Alert className=" bg-red-400 text-white">{error}</Alert>}
+            <OAuth />
           </form>
           <span className="m-10 text-sm">
             Dont have an account?{"  "}
