@@ -1,20 +1,19 @@
-import {
-  Navbar,
-  TextInput,
-  Button,
-  Dropdown,
-  Avatar,
-  DropdownHeader,
-} from "flowbite-react";
+import { Navbar, TextInput, Button, Dropdown, Avatar } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { HiMoon } from "react-icons/hi2";
-import { useSelector } from "react-redux";
-import DashBoard from "../pages/DashBoard";
+import { IoMdSunny } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice";
 
 function Header() {
   const path = useLocation().pathname;
+  const theme = useSelector((state) => state.theme.theme);
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user);
+  const handleTheme = () => {
+    dispatch(toggleTheme());
+  };
 
   return (
     <Navbar className="border-b-2 ">
@@ -40,8 +39,19 @@ function Header() {
         <CiSearch className="mx-auto " />
       </button>
       <div className="flex md:order-2 gap-2">
-        <button className="w-12 h-10 rounded-lg hidden sm:inline bg-gray-50">
-          <HiMoon className="mx-auto" />
+        <button
+          className={
+            theme === "dark"
+              ? "w-12 h-10 rounded-lg hidden sm:inline bg-gray-700"
+              : "w-12 h-10 rounded-lg hidden sm:inline bg-gray-50"
+          }
+          onClick={handleTheme}
+        >
+          {theme === "light" ? (
+            <HiMoon className="mx-auto" />
+          ) : (
+            <IoMdSunny className="mx-auto bg-gray-700"></IoMdSunny>
+          )}
         </button>
         {currentUser.currentUser !== null ? (
           <Dropdown
