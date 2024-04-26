@@ -16,7 +16,12 @@ function DashSideBar() {
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Link to={"?tab=profile"}>
-            <Sidebar.Item active={tab === "profile"} icon={HiUser} label="user">
+            <Sidebar.Item
+              active={tab === "profile"}
+              icon={HiUser}
+              label="user"
+              as="div"
+            >
               Profile
             </Sidebar.Item>
           </Link>
