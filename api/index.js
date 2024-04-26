@@ -4,8 +4,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRout from "./routs/user.rout.js";
 import authRouter from "./routs/auth.rout.js";
+import cookieParser from "cookie-parser";
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 dotenv.config();
 
 //conected to database
