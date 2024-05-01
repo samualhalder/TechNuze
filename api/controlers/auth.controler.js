@@ -47,7 +47,10 @@ export const signIn = async (req, res, next) => {
     if (!chekedPassword) {
       return next(errorHandler(400, "invalid credentials"));
     }
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET
+    );
     const { password: pass, ...rest } = user._doc;
     res
       .status(200)
@@ -67,7 +70,10 @@ export const google = async (req, res, next) => {
     const user = await User.findOne({ email });
     console.log(user);
     if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: user._id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET
+      );
       const { password, ...rest } = user._doc;
       res
         .status(200)
@@ -87,7 +93,10 @@ export const google = async (req, res, next) => {
         photoURL,
       });
       await newUser.save();
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: newUser._id, isAdmin: newUser.isAdmin },
+        process.env.JWT_SECRET
+      );
       const { password, ...rest } = newUser._doc;
       res
         .status(200)
