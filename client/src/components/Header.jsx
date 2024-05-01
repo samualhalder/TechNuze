@@ -5,6 +5,7 @@ import { HiMoon } from "react-icons/hi2";
 import { IoMdSunny } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
+import {signOutSuccess} from '../redux/user/userSlice'
 
 function Header() {
   const path = useLocation().pathname;
@@ -13,6 +14,21 @@ function Header() {
   const currentUser = useSelector((state) => state.user);
   const handleTheme = () => {
     dispatch(toggleTheme());
+  };
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        console.log("user not signed out");
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -77,7 +93,7 @@ function Header() {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignOut}>Sign Out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to={"/signin"}>

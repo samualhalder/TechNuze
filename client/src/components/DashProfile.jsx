@@ -22,6 +22,7 @@ import {
   deleteStart,
   deleteFailure,
   deleteSuccess,
+  signOutSuccess,
 } from "../redux/user/userSlice";
 import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -153,6 +154,21 @@ function DashProfile() {
       console.log(err);
     }
   };
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        console.log("user not signed out");
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col mx-auto w-[400px]">
@@ -225,7 +241,7 @@ function DashProfile() {
       </form>
       <div className="text-red-500 flex flex-row justify-between cursor-pointer">
         <span onClick={() => setShowModal(true)}>delete account?</span>
-        <span>Sign Out</span>
+        <span onClick={handleSignOut}>Sign Out</span>
       </div>
       {userUpdateSuccess && (
         <Alert color="success" className="mt-5">
