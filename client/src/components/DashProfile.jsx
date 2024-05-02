@@ -28,10 +28,10 @@ import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { HiOutlineExclamationCircle, HiCheck } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function DashProfile() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, loading } = useSelector((state) => state.user);
   const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = useState(null);
   const [fileTransferPersantage, setFileTransferPersantage] = useState(null);
@@ -164,6 +164,7 @@ function DashProfile() {
         console.log("user not signed out");
       } else {
         dispatch(signOutSuccess());
+        navigate("/signin");
       }
     } catch (error) {
       console.log(error);
@@ -235,10 +236,23 @@ function DashProfile() {
           id="password"
           onChange={handleChange}
         />
-        <Button type="submit" gradientDuoTone="purpleToBlue" outline>
-          Update
+        {}
+        <Button
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          outline
+          disabled={loading || photoUploading}
+        >
+          {!loading ? "Update" : "Updating..."}
         </Button>
       </form>
+      {currentUser.isAdmin && (
+        <Link to={"/create-post"}>
+          <Button className="w-[90%] mx-auto" gradientDuoTone="purpleToPink">
+            Post a Blog
+          </Button>
+        </Link>
+      )}
       <div className="text-red-500 flex flex-row justify-between cursor-pointer">
         <span onClick={() => setShowModal(true)}>delete account?</span>
         <span onClick={handleSignOut}>Sign Out</span>
