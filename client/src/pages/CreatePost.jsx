@@ -13,11 +13,11 @@ function CreatePost() {
         <div className="flex flex-col sm:flex-row gap-4">
           <TextInput id="title" className="flex-1" required></TextInput>
           <Select id="category">
-            <option>select a option</option>
-            <option>javaScript</option>
-            <option>React</option>
-            <option>Next</option>
-            <option>Node</option>
+            <option value="nocategory">select a option</option>
+            <option value="javascript">javaScript</option>
+            <option value="react">React</option>
+            <option value="next">Next</option>
+            <option value="node">Node</option>
           </Select>
         </div>
         <div className="flex w-full justify-between gap-4 my-5 border-2 border-teal-400 border-dotted p-6">
