@@ -20,7 +20,7 @@ export const createPost = async (req, res, next) => {
   });
   try {
     post.save();
-    res.status(200).json("post saved");
+    res.status(200).json({ messege: "post saved", slug: slug });
   } catch (error) {
     next(errorHandler(400, error.messege));
   }
