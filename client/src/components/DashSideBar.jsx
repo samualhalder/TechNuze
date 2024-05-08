@@ -48,7 +48,7 @@ function DashSideBar() {
           {currentUser.isAdmin && (
             <Link to={"?tab=posts"}>
               <Sidebar.Item active={tab === "posts"} icon={HiDocument} as="div">
-                Profile
+                All Posts
               </Sidebar.Item>
             </Link>
           )}
