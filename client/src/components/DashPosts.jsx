@@ -1,4 +1,5 @@
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +13,8 @@ import { Link } from "react-router-dom";
 
 function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
-  const [posts, setPosts] = useState({});
+  const [posts, setPosts] = useState([]);
+  const [showMore, setShowMore] = useState(true);
   useEffect(() => {
     const fetchPost = async () => {
       const response = await fetch(
@@ -20,6 +22,7 @@ function DashPosts() {
       );
       const data = await response.json();
       if (response.ok) {
+        if (data.posts.length < 9) setShowMore(false);
         setPosts(data.posts);
         console.log("data", data);
       }
@@ -29,6 +32,21 @@ function DashPosts() {
       fetchPost();
     }
   }, [currentUser._id]);
+  const handleShowMore = async () => {
+    try {
+      const response = await fetch(
+        `/api/post/getposts?userID=${currentUser._id}&startIndex=${posts.length}`
+      );
+      const data = await response.json();
+      if (response.ok) {
+        console.log("show more", data);
+        setPosts([...posts, ...data.posts]);
+        if (data.posts.length < 9) setShowMore(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="mt-4  border-gray-800 md:mx-auto overflow-x-scroll scrollbar scrollbar-track-slate-150 scrollbar-thumb-slate-400">
       {currentUser.isAdmin && posts.length ? (
@@ -74,6 +92,11 @@ function DashPosts() {
         </Table>
       ) : (
         <p>noposts</p>
+      )}
+      {showMore && (
+        <Button className="mx-auto mt-3" onClick={handleShowMore}>
+          Show more
+        </Button>
       )}
     </div>
   );

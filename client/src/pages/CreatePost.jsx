@@ -46,7 +46,7 @@ function CreatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadError(null);
             setImageUploadProgess(null);
-            setFormData({ ...formData, image: downloadURL });
+            setFormData({ ...formData, photoURL: downloadURL });
             console.log(formData);
           });
         }
@@ -130,9 +130,9 @@ function CreatePost() {
             {imageUploadError}
           </Alert>
         )}
-        {formData.image && (
+        {formData.photoURL && (
           <img
-            src={formData.image}
+            src={formData.photoURL}
             alt="upload"
             className="w-full h-72 object-cover mb-4"
           />
