@@ -1,6 +1,7 @@
 import { response } from "express";
 import { errorHandler } from "../../utils/error.js";
 import Post from "../models/post.model.js";
+import User from "../models/user.model.js";
 
 export const createPost = async (req, res, next) => {
   if (req.user && !req.user.isAdmin) {
@@ -60,5 +61,25 @@ export const getPosts = async (req, res, next) => {
     res.status(200).json({ posts, totalPosts, lastMonthPosts });
   } catch (error) {
     next(errorHandler(error));
+  }
+};
+
+export const deletePost = async (req, res, next) => {
+  if (!req.body.user) {
+    return next(errorHandler(404, "Unortharize"));
+  }
+  const user = await User.findById(req.body.user);
+  console.log(user);
+  if (!user.isAdmin) {
+    return next(errorHandler(404, "Unortharize"));
+  }
+  try {
+    const response = await Post.findByIdAndDelete(req.body.postID);
+    console.log(response);
+    if (response) {
+      res.status(200).json("post is deleted");
+    }
+  } catch (error) {
+    return next(errorHandler(400, error.errMessage));
   }
 };
