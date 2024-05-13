@@ -137,7 +137,7 @@ function DashPosts() {
                   </span>
                 </TableCell>
                 <TableCell>
-                  <Link to={`/update-post/${post.slug}`}>
+                  <Link to={`/update-post/${post._id}`}>
                     <span className="text-teal-500">UPDATE</span>
                   </Link>
                 </TableCell>
