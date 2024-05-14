@@ -1,6 +1,7 @@
 import express from "express";
 import {
   deleteUser,
+  getAllUsers,
   signOut,
   test,
   updateUser,
@@ -10,6 +11,7 @@ const router = express.Router();
 
 router
   .get("/test", test)
+  .get("/get-all-users", isAuth, getAllUsers)
   .put("/update/:id", isAuth, updateUser)
   .delete("/delete/:id", isAuth, deleteUser)
   .post("/signout", signOut);

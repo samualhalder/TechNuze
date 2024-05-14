@@ -6,6 +6,41 @@ export const test = (req, res) => {
   res.json({ message: "hello world" });
 };
 
+export const getAllUsers = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(
+      errorHandler(401, "You are not allowed to get all users data.")
+    );
+  }
+
+  try {
+    const startIndex = req.query.startInd || 0;
+    const limit = req.query.limit || 9;
+    const order = req.query.order || "asc";
+    const response = await User.find({})
+      .sort({ createdAt: order })
+      .limit(limit)
+      .skip(startIndex);
+    const users = response.map((user) => {
+      const { password, ...rest } = user._doc;
+      return rest;
+    });
+    const month = new Date();
+    const lastMonth = new Date(
+      month.getFullYear(),
+      month.getMonth() - 1,
+      month.getDate()
+    );
+    const totalUsers = await User.countDocuments();
+    const lastMonthUsers = await User.countDocuments({
+      createdAt: { $gte: lastMonth },
+    });
+    res.status(200).json({ users, totalUsers, lastMonthUsers });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export const updateUser = (req, res, next) => {
   if (req.user.id !== req.params.id) {
     return next(errorHandler(401, "You are not allowed to do that"));
