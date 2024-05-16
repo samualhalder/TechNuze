@@ -54,10 +54,9 @@ function DashUsers() {
   const handleDelete = async () => {
     const userID = openModal[1]._id;
     try {
-      const response = await fetch("/api/user/delete-user", {
+      const response = await fetch(`/api/user/delete/${userID}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: currentUser._id }),
       });
       console.log(response);
       if (response.ok) {
