@@ -19,3 +19,15 @@ export const createComment = async (req, res, next) => {
     return next(errorHandler(404, "yes some error"));
   }
 };
+
+export const getComments = async (req, res, next) => {
+  try {
+    const response = await Comment.find({ postID: req.params.postID }).sort({
+      noOflikes: 1,
+    });
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(errorHandler(400, error));
+  }
+};

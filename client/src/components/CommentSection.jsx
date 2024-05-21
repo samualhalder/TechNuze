@@ -1,12 +1,14 @@
 import { Alert, Button, Textarea } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, json } from "react-router-dom";
 import { IoMdSend } from "react-icons/io";
+import Comment from "./Comment";
 function CommentSection({ postID }) {
   const { currentUser } = useSelector((state) => state.user);
   const [error, setError] = useState(null);
   const [comment, setComment] = useState("");
+  const [allComments, setAllComments] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
@@ -34,6 +36,24 @@ function CommentSection({ postID }) {
       setError(error.errMessage);
     }
   };
+  useEffect(() => {
+    try {
+      const getComments = async () => {
+        const response = await fetch(`/api/comment/getComments/${postID}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setAllComments([...data]);
+        } else {
+          console.log(data.errMessage);
+        }
+      };
+      getComments();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [postID]);
+
   return (
     <div className="max-w-[600px] mx-auto mt-8 p-2 border-2  border-gray-300 border-b-0 border-l-0 border-r-0">
       {currentUser ? (
@@ -77,6 +97,19 @@ function CommentSection({ postID }) {
           </div>
           {error && <Alert color="faliure">{error}</Alert>}
         </form>
+      )}
+      {allComments.length === 0 ? (
+        <p>Be the first user to comment on this post.</p>
+      ) : (
+        <>
+          <div className="flex my-4 gap-2 font-bold">
+            <div className="border-gray-400 ">{allComments.length}</div>
+            <p>Comments</p>
+          </div>
+          {allComments.map((comment) => (
+            <Comment key={comment._id} comment={comment} />
+          ))}
+        </>
       )}
     </div>
   );

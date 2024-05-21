@@ -87,7 +87,7 @@ export const updateUser = (req, res, next) => {
 };
 
 export const deleteUser = async (req, res, next) => {
-  if (req.user.id !== req.params.id && req.user.isAdmin===false) {
+  if (req.user.id !== req.params.id && req.user.isAdmin === false) {
     next(errorHandler(401, "you are not allowed to delete this account"));
   }
   try {
@@ -111,5 +111,15 @@ export const signOut = (req, res, next) => {
       .json({ messege: "cookie is cleared" });
   } catch (err) {
     next(err);
+  }
+};
+
+export const getUser = async (req, res, next) => {
+  try {
+    const response = await User.findOne({ userID: req.query.userID });
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
   }
 };

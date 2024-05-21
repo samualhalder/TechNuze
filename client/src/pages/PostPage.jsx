@@ -8,14 +8,14 @@ function PostPage() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
   const [post, setPost] = useState(null);
-  console.log(post);
+
   useEffect(() => {
     try {
       setLoading(true);
       const getPost = async () => {
         const response = await fetch(`/api/post/getposts?slug=${slug}`);
         const data = await response.json();
-        console.log("data", data);
+
         if (response.ok) {
           setPost(data.posts[0]);
           setLoading(false);
