@@ -55,9 +55,7 @@ function PostPage() {
           className=" w-[600px] mx-auto mt-8 post-content"
           dangerouslySetInnerHTML={{ __html: post && post.content }}
         ></div>
-        <div>
-          <CommentSection postID={post?._id} />
-        </div>
+        <div>{post && <CommentSection postID={post._id} />}</div>
       </main>
     );
   }

@@ -31,3 +31,27 @@ export const getComments = async (req, res, next) => {
     next(errorHandler(400, error));
   }
 };
+
+export const likeCommnet = async (req, res, next) => {
+  const { commentID } = req.params;
+  console.log(req.user);
+  const { id } = req.user;
+  const comment = await Comment.findById(commentID);
+  if (!comment) {
+    return next(errorHandler(404, "comment not found"));
+  }
+  try {
+    const index = comment.likes.indexOf(id);
+    if (index === -1) {
+      comment.noOflikes += 1;
+      comment.likes.push(id);
+    } else {
+      comment.noOflikes -= 1;
+      comment.likes.splice(index, 1);
+    }
+    const response = await comment.save();
+    res.status(200).json(response);
+  } catch (error) {
+    return next(error);
+  }
+};

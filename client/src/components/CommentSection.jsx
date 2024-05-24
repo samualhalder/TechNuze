@@ -1,7 +1,7 @@
 import { Alert, Button, Textarea } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, json } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdSend } from "react-icons/io";
 import Comment from "./Comment";
 function CommentSection({ postID }) {
@@ -9,6 +9,7 @@ function CommentSection({ postID }) {
   const [error, setError] = useState(null);
   const [comment, setComment] = useState("");
   const [allComments, setAllComments] = useState([]);
+  const navigator = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
@@ -26,6 +27,7 @@ function CommentSection({ postID }) {
         }),
       });
       const data = await response.json();
+
       if (!response.ok) {
         setComment(data.errMessage);
       } else {
@@ -36,6 +38,32 @@ function CommentSection({ postID }) {
       setError(error.errMessage);
     }
   };
+  const handleLike = async (commentID) => {
+    if (!currentUser) {
+      navigator("/signin");
+    }
+    try {
+      setError(null);
+      const res = await fetch(`/api/comment/like-comment/${commentID}`, {
+        method: "PUT",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setError(null);
+        setAllComments((pre) =>
+          pre.map((comment) =>
+            comment._id === commentID
+              ? { ...comment, noOflikes: data.noOflikes, likes: data.likes }
+              : comment
+          )
+        );
+      } else {
+        setError(data.errMessage);
+      }
+    } catch (error) {
+      setError(error);
+    }
+  };
   useEffect(() => {
     try {
       const getComments = async () => {
@@ -43,7 +71,7 @@ function CommentSection({ postID }) {
         const data = await response.json();
 
         if (response.ok) {
-          setAllComments([...data]);
+          setAllComments(data);
         } else {
           console.log(data.errMessage);
         }
@@ -101,15 +129,19 @@ function CommentSection({ postID }) {
       {allComments.length === 0 ? (
         <p>Be the first user to comment on this post.</p>
       ) : (
-        <>
+        <div>
           <div className="flex my-4 gap-2 font-bold">
             <div className="border-gray-400 ">{allComments.length}</div>
             <p>Comments</p>
           </div>
           {allComments.map((comment) => (
-            <Comment key={comment._id} comment={comment} />
+            <Comment
+              key={comment._id}
+              comment={comment}
+              onLike={handleLike}
+            ></Comment>
           ))}
-        </>
+        </div>
       )}
     </div>
   );

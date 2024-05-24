@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { LuDot } from "react-icons/lu";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
-function Comment({ comment }) {
-  const { userID, content, noOflikes } = comment;
+function Comment({ comment, onLike }) {
   const [user, setUser] = useState({});
+  const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
     try {
       const getUser = async () => {
-        const response = await fetch(`/api/user/${userID}`);
+        const response = await fetch(`/api/user/${comment.userID}`);
         if (response.ok) {
           const data = await response.json();
 
@@ -38,10 +40,18 @@ function Comment({ comment }) {
         </span>
         <span className="text-sm">{moment(comment.createdAt).fromNow()}</span>
       </div>
-      <p className="w-[90%] mx-auto text-sm">{content}</p>
-      <div className="flex items-center">
-        <AiOutlineLike />
-        {noOflikes}
+      <p className="w-[90%] mx-auto text-sm">{comment.content}</p>
+      <div className="w-[90%] mx-auto flex items-center mt-2">
+        <button
+          className={` ${
+            currentUser &&
+            comment.likes.includes(currentUser._id) &&
+            "!text-blue-600"
+          }`}
+        >
+          <AiOutlineLike onClick={() => onLike(comment._id)} />
+        </button>
+        {comment.noOflikes}
       </div>
     </div>
   );
