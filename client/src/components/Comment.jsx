@@ -3,10 +3,13 @@ import { AiOutlineLike } from "react-icons/ai";
 import { LuDot } from "react-icons/lu";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import { Button, Textarea } from "flowbite-react";
 
-function Comment({ comment, onLike }) {
+function Comment({ comment, onLike, onEdit }) {
   const [user, setUser] = useState({});
   const { currentUser } = useSelector((state) => state.user);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(comment.content);
 
   useEffect(() => {
     try {
@@ -40,19 +43,55 @@ function Comment({ comment, onLike }) {
         </span>
         <span className="text-sm">{moment(comment.createdAt).fromNow()}</span>
       </div>
-      <p className="w-[90%] mx-auto text-sm">{comment.content}</p>
-      <div className="w-[90%] mx-auto flex items-center mt-2">
-        <button
-          className={` ${
-            currentUser &&
-            comment.likes.includes(currentUser._id) &&
-            "!text-blue-600"
-          }`}
-        >
-          <AiOutlineLike onClick={() => onLike(comment._id)} />
-        </button>
-        {comment.noOflikes}
-      </div>
+      {isEditing ? (
+        <>
+          <Textarea
+            className="m-2"
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+          ></Textarea>
+          <div className="flex justify-end gap-4">
+            <Button
+              gradientDuoTone="greenToBlue"
+              onClick={() => onEdit(comment, editedText)}
+            >
+              save
+            </Button>
+            <Button
+              // gradientDuoTone="pinkToBlue"
+              color="red"
+              outline
+              onClick={() => setIsEditing(false)}
+            >
+              cancel
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="w-[90%] mx-auto text-sm">{comment.content}</p>
+          <div className="w-[90%] mx-auto flex items-center mt-2">
+            <button
+              className={` ${
+                currentUser &&
+                comment.likes.includes(currentUser._id) &&
+                "!text-blue-600"
+              }`}
+            >
+              <AiOutlineLike onClick={() => onLike(comment._id)} />
+            </button>
+            {comment.noOflikes}
+            {currentUser && currentUser._id === comment.userID && (
+              <button
+                className="ml-5 text-sm hover:text-blue-500"
+                onClick={() => setIsEditing(true)}
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

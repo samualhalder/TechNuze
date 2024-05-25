@@ -23,7 +23,7 @@ export const createComment = async (req, res, next) => {
 export const getComments = async (req, res, next) => {
   try {
     const response = await Comment.find({ postID: req.params.postID }).sort({
-      noOflikes: 1,
+      noOflikes: -1,
     });
 
     res.status(200).json(response);
@@ -53,5 +53,29 @@ export const likeCommnet = async (req, res, next) => {
     res.status(200).json(response);
   } catch (error) {
     return next(error);
+  }
+};
+
+export const editComment = async (req, res, next) => {
+  const { commentID } = req.params;
+
+  const comment = await Comment.findById(commentID);
+  if (!comment) {
+    next(errorHandler(404, "no such comment is found"));
+  }
+  try {
+    if (comment.userID !== req.user.id) {
+      next(errorHandler(401, "you are not allowed to edit this comment"));
+    }
+    const response = await Comment.findByIdAndUpdate(
+      commentID,
+      {
+        content: req.body.content,
+      },
+      { new: true }
+    );
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
   }
 };

@@ -64,6 +64,30 @@ function CommentSection({ postID }) {
       setError(error);
     }
   };
+  const isEdit = async (comment, text) => {
+    try {
+      const res = await fetch(`/api/comment/edit-comment/${comment._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: text,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (res.ok) {
+        allComments((pre) =>
+          pre.map((c) =>
+            c._id === comment._id ? { ...c, content: data.content } : c
+          )
+        );
+      } else {
+        console.log("comment not edited");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     try {
       const getComments = async () => {
@@ -139,6 +163,7 @@ function CommentSection({ postID }) {
               key={comment._id}
               comment={comment}
               onLike={handleLike}
+              onEdit={isEdit}
             ></Comment>
           ))}
         </div>
