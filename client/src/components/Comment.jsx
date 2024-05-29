@@ -5,7 +5,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react";
 
-function Comment({ comment, onLike, onEdit }) {
+function Comment({ comment, onLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});
   const { currentUser } = useSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState(false);
@@ -53,7 +53,11 @@ function Comment({ comment, onLike, onEdit }) {
           <div className="flex justify-end gap-4">
             <Button
               gradientDuoTone="greenToBlue"
-              onClick={() => onEdit(comment, editedText)}
+              onClick={() =>
+                onEdit(comment, editedText)
+                  .then(() => setIsEditing(false))
+                  .catch((err) => console.log(err))
+              }
             >
               save
             </Button>
@@ -70,7 +74,7 @@ function Comment({ comment, onLike, onEdit }) {
       ) : (
         <>
           <p className="w-[90%] mx-auto text-sm">{comment.content}</p>
-          <div className="w-[90%] mx-auto flex items-center mt-2">
+          <div className="w-[90%] mx-auto flex items-center mt-2 text-sm">
             <button
               className={` ${
                 currentUser &&
@@ -89,9 +93,19 @@ function Comment({ comment, onLike, onEdit }) {
                 Edit
               </button>
             )}
+            {currentUser &&
+              (currentUser._id === comment.userID || currentUser.isAdmin) && (
+                <button
+                  className="ml-5 text-sm hover:text-blue-500"
+                  onClick={() => onDelete(comment._id)}
+                >
+                  Delete
+                </button>
+              )}
           </div>
         </>
       )}
+      
     </div>
   );
 }
