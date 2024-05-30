@@ -1,13 +1,16 @@
 import { Spinner } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CommentSection from "../components/CommentSection";
+
+import PostCard from "../components/PostCard";
 
 function PostPage() {
   const { slug } = useParams();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
   const [post, setPost] = useState(null);
+  const [recentPosts, setRecentPosts] = useState([]);
 
   useEffect(() => {
     try {
@@ -30,6 +33,21 @@ function PostPage() {
       setLoading(false);
     }
   }, [slug]);
+  useEffect(() => {
+    try {
+      const fetchRecentPosts = async () => {
+        const res = await fetch("/api/post/getposts?limit=3");
+        const data = await res.json();
+        if (res.ok) {
+          setRecentPosts(data.posts);
+        }
+      };
+      fetchRecentPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   if (loading)
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -56,6 +74,15 @@ function PostPage() {
           dangerouslySetInnerHTML={{ __html: post && post.content }}
         ></div>
         <div>{post && <CommentSection postID={post._id} />}</div>
+        <div className="flex flex-col justify-center items-center m-5">
+          <h1 className="text-2xl font-bold">Recent posts</h1>
+          <div className="flex flex-col gap-4 md:flex-row mt-3">
+            {recentPosts &&
+              recentPosts.map((post) => (
+                <PostCard key={post._id} post={post}></PostCard>
+              ))}
+          </div>
+        </div>
       </main>
     );
   }
