@@ -32,6 +32,25 @@ export const getComments = async (req, res, next) => {
   }
 };
 
+export const getAllComments = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(errorHandler(401, "you are not allowed."));
+  }
+  try {
+    const startInd = req.query.startInd || 0;
+    const limit = req.query.limit || 9;
+    const order = req.query.order || -1;
+    const comments = await Comment.find({})
+      .skip(startInd)
+      .limit(limit)
+      .sort({ createdAt: order });
+    const totalComments = await Comment.countDocuments();
+    res.status(200).json({ comments: comments, totalComments });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const likeCommnet = async (req, res, next) => {
   const { commentID } = req.params;
   console.log(req.user);
