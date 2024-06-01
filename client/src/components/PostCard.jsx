@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function PostCard({ post }) {
   return (
-    <div className="group relative w-full h-[350px] overflow-hidden border border-teal-500  rounded-lg hover:border-4 transition-all duration-500">
+    <div className="group relative w-[320px] h-[350px] overflow-hidden border border-teal-500  rounded-lg hover:border-4 transition-all duration-500">
       <div>
         <img
           src={post.photoURL}
