@@ -75,6 +75,7 @@ export const updateUser = (req, res, next) => {
         username: req.body.username,
         password: req.body.params,
         photoURL: req.body.photoURL,
+        password: req.body.password,
       },
     },
     { new: true }
