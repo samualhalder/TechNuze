@@ -27,7 +27,7 @@ function DashUsers() {
       if (response.ok) {
         if (data.users.length < 9) setShowMore(false);
         setUsers(data.users);
-        console.log("data", data);
+       // console.log("data", data);
       }
     };
     if (currentUser.isAdmin) {
@@ -41,7 +41,7 @@ function DashUsers() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log("show more", data);
+       // console.log("show more", data);
         setUsers([...users, ...data.users]);
         if (data.users.length < 9) setShowMore(false);
       } else {
@@ -58,14 +58,14 @@ function DashUsers() {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      console.log(response);
+    //  console.log(response);
       if (response.ok) {
         setUsers(users.filter((elm) => elm._id !== userID));
-        console.log("post delted successfully");
+        //console.log("post delted successfully");
         setOpenModal([false, null]);
       }
     } catch (error) {
-      console.log(error);
+    //  console.log(error);
       setOpenModal([false, null]);
     }
   };

@@ -78,18 +78,16 @@ function CommentSection({ postID }) {
         }),
       });
       const data = await res.json();
-      console.log(data);
+
       if (res.ok) {
         allComments((pre) =>
           pre.map((c) =>
             c._id === comment._id ? { ...c, content: data.content } : c
           )
         );
-      } else {
-        console.log("comment not edited");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   const handleDelete = async () => {
@@ -102,7 +100,7 @@ function CommentSection({ postID }) {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log("commetn delete succefully");
+        //console.log("commetn delete succefully");
         setShowModal(false);
         setDeleteCommentID(null);
       } else {
@@ -111,7 +109,7 @@ function CommentSection({ postID }) {
         console.log(data.errMessage);
       }
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   };
   useEffect(() => {
@@ -123,12 +121,12 @@ function CommentSection({ postID }) {
         if (response.ok) {
           setAllComments(data);
         } else {
-          console.log(data.errMessage);
+         // console.log(data.errMessage);
         }
       };
       getComments();
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   }, [postID]);
 

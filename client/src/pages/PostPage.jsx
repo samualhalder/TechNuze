@@ -44,7 +44,7 @@ function PostPage() {
       };
       fetchRecentPosts();
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   }, []);
 

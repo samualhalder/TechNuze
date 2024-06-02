@@ -22,12 +22,12 @@ function Header() {
       });
       const data = await response.json();
       if (!response.ok) {
-        console.log("user not signed out");
+      //  console.log("user not signed out");
       } else {
         dispatch(signOutSuccess());
       }
     } catch (error) {
-      console.log(error);
+   //   console.log(error);
     }
   };
 

@@ -29,9 +29,9 @@ function DashPosts() {
       if (response.ok) {
         if (data.posts.length < 9) setShowMore(false);
         setPosts(data.posts);
-        console.log("data", data);
+       // console.log("data", data);
       }
-      console.log(posts);
+     // console.log(posts);
     };
     if (currentUser.isAdmin) {
       fetchPost();
@@ -44,7 +44,7 @@ function DashPosts() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log("show more", data);
+        //console.log("show more", data);
         setPosts([...posts, ...data.posts]);
         if (data.posts.length < 9) setShowMore(false);
       } else {
@@ -62,14 +62,14 @@ function DashPosts() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ postID, user: currentUser._id }),
       });
-      console.log(response);
+      //console.log(response);
       if (response.ok) {
         setPosts(posts.filter((elm) => elm._id !== postID));
-        console.log("post delted successfully");
+       // console.log("post delted successfully");
         setOpenModal([false, null]);
       }
     } catch (error) {
-      console.log(error);
+     // console.log(error);
       setOpenModal([false, null]);
     }
   };

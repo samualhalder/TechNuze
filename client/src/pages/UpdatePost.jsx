@@ -29,17 +29,17 @@ function UpdatePost() {
       const fetchPost = async () => {
         const response = await fetch(`/api/post/getposts?postID=${postID}`);
         const data = await response.json();
-        console.log("data", data);
+        //console.log("data", data);
         if (response.ok) {
           setFormData(data.posts[0]);
-          console.log("formdata", formData);
+          //console.log("formdata", formData);
         } else {
           setFormUplaodError(data.errMessege);
         }
       };
       fetchPost();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setFormUplaodError(error);
     }
   }, [postID]);
@@ -70,14 +70,14 @@ function UpdatePost() {
             setImageUploadError(null);
             setImageUploadProgess(null);
             setFormData({ ...formData, photoURL: downloadURL });
-            console.log(formData);
+            // console.log(formData);
           });
         }
       );
     } catch (error) {
       setImageUploadError("something went wrong");
       setImageUploadProgess(null);
-      console.log(error);
+      // console.log(error);
     }
   };
   const handleSubmit = async (e) => {
@@ -96,11 +96,11 @@ function UpdatePost() {
         return setFormUplaodError(data.errMessege);
       }
       setFormUplaodError(null);
-      console.log(data, response);
+      //  console.log(data, response);
       navigate(`/post/${data.slug}`);
     } catch (error) {
       setFormUplaodError(error.errMessege);
-      console.log(error);
+      //  console.log(error);
     }
   };
 

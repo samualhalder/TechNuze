@@ -47,14 +47,14 @@ function CreatePost() {
             setImageUploadError(null);
             setImageUploadProgess(null);
             setFormData({ ...formData, photoURL: downloadURL });
-            console.log(formData);
+         //   console.log(formData);
           });
         }
       );
     } catch (error) {
       setImageUploadError("something went wrong");
       setImageUploadProgess(null);
-      console.log(error);
+    //  console.log(error);
     }
   };
   const handleSubmit = async (e) => {
@@ -70,11 +70,11 @@ function CreatePost() {
         return setFormUplaodError(data.errMessege);
       }
       setFormUplaodError(null);
-      console.log(data, response);
+     // console.log(data, response);
       navigate(`/post/${data.slug}`);
     } catch (error) {
       setFormUplaodError(error.errMessege);
-      console.log(error);
+    //  console.log(error);
     }
   };
 

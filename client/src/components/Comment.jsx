@@ -19,13 +19,11 @@ function Comment({ comment, onLike, onEdit, onDelete }) {
           const data = await response.json();
 
           setUser(data);
-        } else {
-          console.log("no such user");
         }
       };
       getUser();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, [comment]);
 
@@ -56,7 +54,7 @@ function Comment({ comment, onLike, onEdit, onDelete }) {
               onClick={() =>
                 onEdit(comment, editedText)
                   .then(() => setIsEditing(false))
-                  .catch((err) => console.log(err))
+                  .catch((err) => console.log(""))
               }
             >
               save
@@ -105,7 +103,6 @@ function Comment({ comment, onLike, onEdit, onDelete }) {
           </div>
         </>
       )}
-      
     </div>
   );
 }

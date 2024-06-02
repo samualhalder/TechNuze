@@ -41,7 +41,7 @@ function DashComments() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log("show more", data);
+        // console.log("show more", data);
         setComments([...comments, ...data.user]);
         if (data.users.length < 9) setShowMore(false);
       } else {
@@ -53,20 +53,20 @@ function DashComments() {
   };
   const handleDelete = async () => {
     const commentID = openModal[1];
-    console.log(commentID);
+    //  console.log(commentID);
     try {
       const response = await fetch(`/api/comment/delete-comment/${commentID}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      console.log(response);
+      //  console.log(response);
       if (response.ok) {
         setComments(comments.filter((elm) => elm._id !== commentID));
-        console.log("post delted successfully");
+        // console.log("post delted successfully");
         setOpenModal(false, null);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       setOpenModal(false, null);
     }
   };

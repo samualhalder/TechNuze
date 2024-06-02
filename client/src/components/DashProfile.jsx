@@ -95,7 +95,7 @@ function DashProfile() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log(formData);
+   // console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -151,7 +151,7 @@ function DashProfile() {
     } catch (err) {
       dispatch(deleteFailure(err.errMessege));
       setUserDeleteMessage(err.errMessege);
-      console.log(err);
+    //  console.log(err);
     }
   };
   const handleSignOut = async () => {
@@ -161,13 +161,13 @@ function DashProfile() {
       });
       const data = await response.json();
       if (!response.ok) {
-        console.log("user not signed out");
+       // console.log("user not signed out");
       } else {
         dispatch(signOutSuccess());
         navigate("/signin");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
