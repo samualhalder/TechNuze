@@ -38,10 +38,10 @@ export const getPosts = async (req, res, next) => {
       ...(req.query.category && { category: req.query.category }),
       ...(req.query.slug && { slug: req.query.slug }),
       ...(req.query.postID && { _id: req.query.postID }),
-      ...(req.query.searchTerm && {
+      ...(req.query.searchTearm && {
         $or: [
-          { title: { $regex: req.query.searchTerm, $options: "i" } },
-          { content: { $regex: req.query.searchTerm }, $options: "i" },
+          { title: { $regex: req.query.searchTearm, $options: "i" } },
+          { content: { $regex: req.query.searchTearm, $options: "i" } },
         ],
       }),
     })
@@ -60,7 +60,7 @@ export const getPosts = async (req, res, next) => {
     const lastMonthPosts = await Post({ createdAt: { $gte: oneMonthAgo } });
     res.status(200).json({ posts, totalPosts, lastMonthPosts });
   } catch (error) {
-    next(errorHandler(error));
+    next(error);
   }
 };
 

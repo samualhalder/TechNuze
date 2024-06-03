@@ -1,17 +1,29 @@
 import { Navbar, TextInput, Button, Dropdown, Avatar } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { HiMoon } from "react-icons/hi2";
 import { IoMdSunny } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
-import {signOutSuccess} from '../redux/user/userSlice'
+import { signOutSuccess } from "../redux/user/userSlice";
+import { useEffect, useState } from "react";
 
 function Header() {
   const path = useLocation().pathname;
   const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.user);
+  const [searchTearm, setSearchTearm] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchParams = urlParams.get("searchTearm");
+    if (searchParams) {
+      setSearchTearm(searchParams);
+    }
+  }, [location.search]);
   const handleTheme = () => {
     dispatch(toggleTheme());
   };
@@ -22,15 +34,21 @@ function Header() {
       });
       const data = await response.json();
       if (!response.ok) {
-      //  console.log("user not signed out");
+        //  console.log("user not signed out");
       } else {
         dispatch(signOutSuccess());
       }
     } catch (error) {
-   //   console.log(error);
+      //   console.log(error);
     }
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTearm", searchTearm);
+    const searchParams = urlParams.toString();
+    navigate(`/search?${searchParams}`);
+  };
   return (
     <Navbar className="border-b-2 ">
       <Link
@@ -42,18 +60,20 @@ function Header() {
         </span>
         365
       </Link>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <TextInput
-          className="border-purple-600 hidden lg:block"
+          className="border-purple-600 hidden md:block"
           type="text"
+          value={searchTearm}
           placeholder="search..."
           rightIcon={CiSearch}
+          onChange={(e) => setSearchTearm(e.target.value)}
         />
       </form>
-
-      <button className="lg:hidden rounded-lg bg-gray-50 w-12 h-10">
-        <CiSearch className="mx-auto " />
+      <button className="lg:hidden rounded-lg bg-gray-50 w-12 h-10 cursor-pointer">
+        <CiSearch className="mx-auto" />
       </button>
+
       <div className="flex md:order-2 gap-2">
         <button
           className={
