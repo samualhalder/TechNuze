@@ -8,7 +8,7 @@ function SearchPage() {
   const navigate = useNavigate();
   const [sideBarData, setSideBarData] = useState({
     searchTearm: "",
-    order: "desc",
+    order: "asc",
     category: "uncategorized",
   });
   const [posts, setPosts] = useState(null);
@@ -20,11 +20,11 @@ function SearchPage() {
     setPosts(null);
     const urlParams = new URLSearchParams(location.search);
     const searchTearm = urlParams.get("searchTearm");
-    console.log(typeof searchTearm);
     const category = urlParams.get("category");
     const order = urlParams.get("order");
     if (searchTearm || category || order) {
       setSideBarData({ ...sideBarData, searchTearm, order, category });
+      console.log("data", sideBarData);
     }
     const fetchData = async () => {
       const serahQuary = urlParams.toString();
@@ -38,7 +38,7 @@ function SearchPage() {
     fetchData();
   }, [location.search]);
   //   console.log(sideBarData);
-  console.log("posts", posts);
+  console.log("data", sideBarData);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -65,8 +65,10 @@ function SearchPage() {
     console.log("submitted");
   };
   return (
-    <div className=" h-screen flex flex-col md:flex-row ">
-      <div className="p-7 border-b md:border-r border-gray-500  md:w-[30%] md:h-full md:text-lg">
+    <div className="min-h-screen flex flex-col md:flex-row ">
+      {/* Left side */}
+
+      <div className="p-7 border-b md:border-r border-gray-500  md:w-[30%] md:min-h-screen md:text-lg">
         <form className="p-4" onSubmit={handleSubmit}>
           <div className="flex gap-4 items-center m-3">
             <label htmlFor="">Search Term :</label>
@@ -82,7 +84,6 @@ function SearchPage() {
             <Select
               onChange={handleChange}
               id="order"
-              defaultValue="asc"
               value={sideBarData.order}
             >
               <option value="asc">Latest</option>
