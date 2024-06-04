@@ -118,22 +118,14 @@ function SearchPage() {
 
       {/* Rigth Side */}
 
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <h1 className="font-bold text-xl m-5">Results</h1>
         <div className="flex flex-wrap gap-4 m-3">
           {posts &&
             posts.map((post) => <PostCard key={post._id} post={post} />)}
         </div>
         {posts && posts.length === 0 && <p className="m-4">No result Found</p>}
-        {loading && (
-          <div className="felx justify-center items-center">
-            {" "}
-            <Spinner
-              size="3xl"
-              className="justify-center items-center"
-            ></Spinner>
-          </div>
-        )}
+        {loading && <Spinner size="xl" className="flex mx-auto"></Spinner>}
       </div>
     </div>
   );
