@@ -16,6 +16,7 @@ function Header() {
   const currentUser = useSelector((state) => state.user);
   const [searchTearm, setSearchTearm] = useState("");
   const location = useLocation();
+  const [mobileSearchPage, setMobileSearchPage] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -49,6 +50,15 @@ function Header() {
     const searchParams = urlParams.toString();
     navigate(`/search?${searchParams}`);
   };
+  const handleMobileSearch = () => {
+    if (mobileSearchPage) {
+      setMobileSearchPage(false);
+      navigate("/");
+    } else {
+      setMobileSearchPage(true);
+      navigate("/search");
+    }
+  };
   return (
     <Navbar className="border-b-2 ">
       <Link
@@ -70,7 +80,10 @@ function Header() {
           onChange={(e) => setSearchTearm(e.target.value)}
         />
       </form>
-      <button className="lg:hidden rounded-lg bg-gray-50 w-12 h-10 cursor-pointer">
+      <button
+        onClick={handleMobileSearch}
+        className="lg:hidden rounded-lg border hover:bg-gray-800 border-cyan-600 w-12 h-10 cursor-pointer"
+      >
         <CiSearch className="mx-auto" />
       </button>
 
