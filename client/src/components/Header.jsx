@@ -60,15 +60,16 @@ function Header() {
     }
   };
   return (
-    <Navbar className="border-b-2 ">
+    <Navbar className="border-b-2 sticky top-0 z-10">
       <Link
         to={"/"}
         className="whitespace-nowrap text-sm sm:text-lg self-center"
       >
-        <span className="p-2 bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-400 text-white rounded-lg">
-          CodeBlogs
-        </span>
-        365
+        <img
+          className=" bg-gradient-to-r h-10 text-white"
+          src="../../public/white-transparent.png"
+          alt="logo"
+        />
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput

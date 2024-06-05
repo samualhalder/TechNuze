@@ -51,17 +51,22 @@ function Signin() {
       <div className="flex p-4 max-w-3xl mx-auto flex-col md:flex-row md:items-center">
         {/* left */}
         <div className="flex-1 ">
-          <Link to={"/"} className="text-4xl text-bold mt-10 text-center">
-            <span className="p-2 bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-400 text-white rounded-lg">
-              CodeBlogs
-            </span>
-            365
+          <Link
+            to={"/"}
+            className="whitespace-nowrap text-sm sm:text-lg self-center"
+          >
+            <img
+              className="p-2 bg-gradient-to-r h-20 text-white rounded-lg"
+              src="../../public/white-transparent.png"
+              alt="logo"
+            />
           </Link>
           <p className="mt-4 text-sm">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque
-            nemo ab, eaque iusto, odit asperiores ducimus quis aspernatur fuga
-            ipsam reiciendis non deserunt vitae eveniet, totam tempore quasi
-            similique voluptate.
+            your premier destination for the latest and most exciting tech news
+            from around the world. Stay informed with up-to-the-minute updates,
+            in-depth analyses, and insightful commentary on all things tech.
+            Join us and stay ahead of the curve in the ever-evolving world of
+            technology
           </p>
         </div>
         {/* right */}

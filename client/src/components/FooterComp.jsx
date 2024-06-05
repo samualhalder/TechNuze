@@ -10,12 +10,13 @@ function FooterComp() {
           <div>
             <Link
               to={"/"}
-              className="whitespace-nowrap text-lg sm:text-lg self-center font-bold"
+              className="whitespace-nowrap text-sm sm:text-lg self-center"
             >
-              <span className="p-2 bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-400 text-white rounded-lg">
-                CodeBlogs
-              </span>
-              365
+              <img
+                className="p-2 bg-gradient-to-r h-20 text-white rounded-lg"
+                src="../../public/white-transparent.png"
+                alt="logo"
+              />
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 mt-4 sm:gap-10">
