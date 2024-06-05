@@ -10,6 +10,7 @@ import {
 import OAuth from "../components/OAuth";
 
 function Signin() {
+  const { theme } = useSelector((state) => state.theme);
   const [formData, setFormData] = useState({});
   const loading = useSelector((state) => state.user.loading);
   const error = useSelector((state) => state.user.error);
@@ -57,7 +58,11 @@ function Signin() {
           >
             <img
               className="p-2 bg-gradient-to-r h-20 text-white rounded-lg"
-              src="../../public/white-transparent.png"
+              src={
+                theme === "dark"
+                  ? `../../public/white-transparent.png`
+                  : "../../public/black-transparent.png"
+              }
               alt="logo"
             />
           </Link>

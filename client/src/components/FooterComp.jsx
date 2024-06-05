@@ -2,7 +2,10 @@ import { Footer } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 import { BsFacebook, BsTwitterX, BsInstagram } from "react-icons/bs";
+
+import { useSelector } from "react-redux";
 function FooterComp() {
+  const { theme } = useSelector((state) => state.theme);
   return (
     <Footer className="border border-t-8 border-teal-400 h-full p-10">
       <div className="w-full max-w-7xl mx-auto">
@@ -14,7 +17,11 @@ function FooterComp() {
             >
               <img
                 className="p-2 bg-gradient-to-r h-20 text-white rounded-lg"
-                src="../../public/white-transparent.png"
+                src={
+                  theme === "dark"
+                    ? `../../public/white-transparent.png`
+                    : "../../public/black-transparent.png"
+                }
                 alt="logo"
               />
             </Link>

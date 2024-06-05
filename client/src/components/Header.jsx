@@ -67,7 +67,11 @@ function Header() {
       >
         <img
           className=" bg-gradient-to-r h-10 text-white"
-          src="../../public/white-transparent.png"
+          src={
+            theme === "dark"
+              ? `../../public/white-transparent.png`
+              : "../../public/black-transparent.png"
+          }
           alt="logo"
         />
       </Link>

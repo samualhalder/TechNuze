@@ -2,8 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import OAuth from "../components/OAuth";
+import { useSelector } from "react-redux";
 
 function Signup() {
+  const { theme } = useSelector((state) => state.theme);
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,7 +52,11 @@ function Signup() {
           >
             <img
               className="p-2 bg-gradient-to-r h-20 text-white rounded-lg"
-              src="../../public/white-transparent.png"
+              src={
+                theme === "dark"
+                  ? `../../public/white-transparent.png`
+                  : "../../public/black-transparent.png"
+              }
               alt="logo"
             />
           </Link>
