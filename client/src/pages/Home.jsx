@@ -19,7 +19,7 @@ function Home() {
   }, []);
   return (
     <div>
-      <div className="p-2 flex flex-col gap-6  h-[500px]   items-start justify-center bg-[url(https://www.pixelstalk.net/wp-content/uploads/2016/06/Plain-light-blue-background-1920x1080.jpg)] dark:bg-[url(https://e0.pxfuel.com/wallpapers/37/754/desktop-wallpaper-cool-website-background-best-background.jpg)] object-cover  backdrop-blur-md bg-white/30">
+      <div className="p-2 flex flex-col gap-6  h-[500px]   items-start justify-center bg-[url(https://www.pixelstalk.net/wp-content/uploads/2016/06/Plain-light-blue-background-1920x1080.jpg)] dark:bg-[url(https://e0.pxfuel.com/wallpapers/37/754/desktop-wallpaper-cool-website-background-best-background.jpg)] dark:bg-cover  backdrop-blur-md bg-white/30">
         <h1 className="text-3xl text-white lg:text-5xl font-sans ">
           Welcome to <span className=" font-serif">TechNuze</span>
         </h1>

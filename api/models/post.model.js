@@ -8,7 +8,8 @@ export const postSchema = new mongoose.Schema(
     category: { type: String, default: "nocategory" },
     photoURL: {
       type: String,
-      default: "https://pbwebdev.co.uk/wp-content/uploads/2018/12/blogs.jpg",
+      default:
+        "https://media.licdn.com/dms/image/D4D12AQG56UPUtPJj0w/article-cover_image-shrink_423_752/0/1669373321238?e=1723075200&v=beta&t=MhAW2X7UAvfbAbejhSBJBD70qnQTtjmcMcXreQ14LQo",
     },
     slug: { type: String, require: true },
   },
