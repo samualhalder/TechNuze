@@ -9,7 +9,7 @@ function SearchPage() {
   const [sideBarData, setSideBarData] = useState({
     searchTearm: "",
     order: "asc",
-    category: "uncategorized",
+    category: "",
   });
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,7 +50,7 @@ function SearchPage() {
       setSideBarData({ ...sideBarData, order: sort });
     }
     if (e.target.id === "category") {
-      const category = e.target.value || "uncatagorized";
+      const category = e.target.value || "";
       setSideBarData({ ...sideBarData, category });
     }
   };
@@ -94,11 +94,11 @@ function SearchPage() {
             <label htmlFor="">Category:</label>
             <Select
               onChange={handleChange}
-              defaultValue={null}
+              defaultValue={""}
               id="category"
               value={sideBarData.category}
             >
-              <option value="nocategory">--Chose one--</option>
+              <option value="">--Chose one--</option>
               <option value="startup">Start up</option>
               <option value="mnc">MNC</option>
               <option value="latest-tech">Latest Tech</option>

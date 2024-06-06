@@ -99,7 +99,7 @@ function CreatePost() {
               setFormData({ ...formData, category: e.target.value })
             }
           >
-            <option value="nocategory">select a option</option>
+            <option value="">select a option</option>
             <option value="startup">Start up</option>
             <option value="mnc">MNC</option>
             <option value="latest-tech">Latest Tech</option>

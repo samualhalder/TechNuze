@@ -127,7 +127,7 @@ function UpdatePost() {
               setFormData({ ...formData, category: e.target.value })
             }
           >
-            <option value="nocategory">select an option</option>
+          <option value="">select an option</option>
             <option value="startup">Start up</option>
             <option value="mnc">MNC</option>
             <option value="latest-tech">Latest Tech</option>
