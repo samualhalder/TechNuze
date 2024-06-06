@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "flowbite-react";
 import PostCard from "../components/PostCard";
 
 function Home() {
@@ -6,7 +7,7 @@ function Home() {
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {
-        const res = await fetch("/api/post/getposts?limit=9");
+        const res = await fetch("/api/post/getposts?limit=8");
         const data = await res.json();
         if (res.ok) {
           setRecentPosts(data.posts);
@@ -17,6 +18,19 @@ function Home() {
       // console.log(error);
     }
   }, []);
+  const handleMorePosts = async () => {
+    try {
+      const res = await fetch(
+        `/api/post/getposts?limit=${recentPosts.length * 2}`
+      );
+      const data = await res.json();
+      if (res.ok) {
+        setRecentPosts(data.posts);
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  };
   return (
     <div>
       <div className="p-2 flex flex-col gap-6  h-[500px]   items-start justify-center bg-[url(https://www.pixelstalk.net/wp-content/uploads/2016/06/Plain-light-blue-background-1920x1080.jpg)] dark:bg-[url(https://e0.pxfuel.com/wallpapers/37/754/desktop-wallpaper-cool-website-background-best-background.jpg)] dark:bg-cover  backdrop-blur-md bg-white/30">
@@ -31,13 +45,18 @@ function Home() {
           technology.
         </p>
       </div>
-      <div className="">
+      <div className="flex flex-col">
         <div className="flex flex-wrap gap-7 justify-center items-center m-6">
           {recentPosts &&
             recentPosts.map((post) => (
               <PostCard key={post._id} post={post}></PostCard>
             ))}
         </div>
+        {recentPosts.length % 8 === 0 && (
+          <Button onClick={handleMorePosts} className="mx-auto my-2">
+            See more
+          </Button>
+        )}
       </div>
     </div>
   );
