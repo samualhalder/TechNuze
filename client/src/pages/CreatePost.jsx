@@ -100,10 +100,11 @@ function CreatePost() {
             }
           >
             <option value="nocategory">select a option</option>
-            <option value="javascript">javaScript</option>
-            <option value="react">React</option>
-            <option value="next">Next</option>
-            <option value="node">Node</option>
+            <option value="startup">Start up</option>
+            <option value="mnc">MNC</option>
+            <option value="latest-tech">Latest Tech</option>
+            <option value="hiring">Hiring</option>
+            <option value="other">Other</option>
           </Select>
         </div>
         <div className="flex w-full justify-between gap-4 my-5 border-2 border-teal-400 border-dotted p-6">

@@ -98,11 +98,12 @@ function SearchPage() {
               id="category"
               value={sideBarData.category}
             >
-              <option value="uncategorized">--Chodse--</option>
-              <option value="javascript">Javascript</option>
-              <option value="react">React.js</option>
-              <option value="node">node</option>
-              <option value="next">next</option>
+              <option value="nocategory">--Chose one--</option>
+              <option value="startup">Start up</option>
+              <option value="mnc">MNC</option>
+              <option value="latest-tech">Latest Tech</option>
+              <option value="hiring">Hiring</option>
+              <option value="other">Other</option>
             </Select>
           </div>
           <Button
