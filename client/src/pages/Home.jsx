@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
+import { Button, Carousel } from "flowbite-react";
 import PostCard from "../components/PostCard";
 
 function Home() {
@@ -34,16 +34,17 @@ function Home() {
   return (
     <div>
       <div className="p-2 flex flex-col gap-6  h-[500px]   items-start justify-center bg-[url(https://www.pixelstalk.net/wp-content/uploads/2016/06/Plain-light-blue-background-1920x1080.jpg)] dark:bg-[url(https://e0.pxfuel.com/wallpapers/37/754/desktop-wallpaper-cool-website-background-best-background.jpg)] dark:bg-cover  backdrop-blur-md bg-white/30">
-        <h1 className="text-3xl text-white lg:text-5xl font-sans ">
-          Welcome to <span className=" font-serif">TechNuze</span>
-        </h1>
-        <p className="text-gray-00">
-          your premier destination for the latest and most exciting tech news
-          from around the world. Stay informed with up-to-the-minute updates,
-          in-depth analyses, and insightful commentary on all things tech. Join
-          us and stay ahead of the curve in the ever-evolving world of
-          technology.
-        </p>
+        <Carousel>
+          <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+            Slide 1
+          </div>
+          <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+            Slide 2
+          </div>
+          <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+            Slide 3
+          </div>
+        </Carousel>
       </div>
       <div className="flex flex-col">
         <div className="flex flex-wrap gap-7 justify-center items-center m-6">
