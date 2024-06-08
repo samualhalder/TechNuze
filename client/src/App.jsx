@@ -38,7 +38,7 @@ function App() {
               element={<UpdatePost></UpdatePost>}
             ></Route>
           </Route>
-          <Route path="/projects" element={<Projects></Projects>}></Route>
+
           <Route path="/posts/:slug" element={<PostPage />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
         </Routes>

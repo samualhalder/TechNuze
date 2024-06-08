@@ -103,7 +103,7 @@ function DashComments() {
         </Modal.Body>
       </Modal>
       {currentUser.isAdmin && comments.length ? (
-        <Table className="dark:bg-gray-800 rounded-md bg-gray-200 shadow-md">
+        <Table className="dark:bg-gray-800 rounded-md bg-gray-200 shadow-md mx-1">
           <TableHead>
             <TableHeadCell>Created At</TableHeadCell>
             <TableHeadCell>Post ID</TableHeadCell>
