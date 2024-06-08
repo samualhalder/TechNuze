@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Carousel } from "flowbite-react";
 import PostCard from "../components/PostCard";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [recentPosts, setRecentPosts] = useState([]);
@@ -33,17 +34,51 @@ function Home() {
   };
   return (
     <div>
-      <div className="p-2 flex flex-col gap-6  h-[500px]   items-start justify-center bg-[url(https://www.pixelstalk.net/wp-content/uploads/2016/06/Plain-light-blue-background-1920x1080.jpg)] dark:bg-[url(https://e0.pxfuel.com/wallpapers/37/754/desktop-wallpaper-cool-website-background-best-background.jpg)] dark:bg-cover  backdrop-blur-md bg-white/30">
-        <Carousel>
-          <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-            Slide 1
-          </div>
-          <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-            Slide 2
-          </div>
-          <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-            Slide 3
-          </div>
+      <div className="p-2 flex flex-col gap-6  h-[500px]   items-start justify-center dark:bg-[#10172A]  backdrop-blur-md bg-white/30">
+        <Carousel className=" relative text-gray-400 hover:border-4 border-cyan-400 rounded-lg duration-300">
+          <Link
+            className="h-full w-full group "
+            to={`/posts/${recentPosts[0]?.slug}`}
+          >
+            <img
+              className="h-full w-full hover:-translate-y-24  duration-300"
+              src={recentPosts[0]?.photoURL}
+              alt=""
+            />
+            <h1 className="item-1 md:hidden absolute bottom-0 left-10 text-5xl font-mono group-hover:block">
+              {recentPosts[0]?.title}
+              <p className="text-lg">{recentPosts[0]?.category}</p>
+            </h1>
+          </Link>
+
+          <Link
+            className="h-full w-full group"
+            to={`/posts/${recentPosts[1]?.slug}`}
+          >
+            <img
+              className="h-full w-full hover:-translate-y-24  duration-300"
+              src={recentPosts[1]?.photoURL}
+              alt=""
+            />
+            <h1 className="item-1 md:hidden absolute bottom-0 left-10 text-5xl font-mono group-hover:block">
+              {recentPosts[1]?.title}
+              <p className="text-lg">{recentPosts[1]?.category}</p>
+            </h1>
+          </Link>
+          <Link
+            className="h-full w-full group"
+            to={`/posts/${recentPosts[2]?.slug}`}
+          >
+            <img
+              className="h-full w-full hover:-translate-y-24  duration-300"
+              src={recentPosts[2]?.photoURL}
+              alt=""
+            />
+            <h1 className="item-1 md:hidden absolute bottom-0 left-10 text-5xl font-mono group-hover:block">
+              {recentPosts[2]?.title}
+              <p className="text-lg">{recentPosts[2]?.category}</p>
+            </h1>
+          </Link>
         </Carousel>
       </div>
       <div className="flex flex-col">
