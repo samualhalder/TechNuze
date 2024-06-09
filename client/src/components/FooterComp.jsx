@@ -37,7 +37,7 @@ function FooterComp() {
                   Github
                 </Footer.Link>
                 <Footer.Link
-                  href="https://linkedin.com/samualhalder"
+                  href="https://www.linkedin.com/in/samual-halder-464b8820a/"
                   target="_blanck"
                 >
                   LinkedIn
@@ -54,7 +54,7 @@ function FooterComp() {
                   twitter
                 </Footer.Link>
                 <Footer.Link
-                  href="https://linkedin.com/samualhalder"
+                  href="https://www.linkedin.com/in/samual-halder-464b8820a/r"
                   target="_blanck"
                 >
                   LinkedIn
@@ -78,7 +78,7 @@ function FooterComp() {
         <div className="grid grid-rows-2 sm:flex sm:justify-between">
           <Footer.Copyright
             by="Samual Halder"
-            href="https://linkedin/samualhalder"
+            href="https://www.linkedin.com/in/samual-halder-464b8820a/"
             target="_blanck"
             year={new Date().getFullYear()}
           />

@@ -41,7 +41,7 @@ function Home() {
             to={`/posts/${recentPosts[0]?.slug}`}
           >
             <img
-              className="h-full w-full hover:-translate-y-24  duration-300"
+              className="h-full w-full hover:-translate-y-24  duration-200"
               src={recentPosts[0]?.photoURL}
               alt=""
             />
@@ -56,7 +56,7 @@ function Home() {
             to={`/posts/${recentPosts[1]?.slug}`}
           >
             <img
-              className="h-full w-full hover:-translate-y-24  duration-300"
+              className="h-full w-full hover:-translate-y-24  duration-200"
               src={recentPosts[1]?.photoURL}
               alt=""
             />
@@ -70,7 +70,7 @@ function Home() {
             to={`/posts/${recentPosts[2]?.slug}`}
           >
             <img
-              className="h-full w-full hover:-translate-y-24  duration-300"
+              className="h-full w-full hover:-translate-y-24  duration-200"
               src={recentPosts[2]?.photoURL}
               alt=""
             />
