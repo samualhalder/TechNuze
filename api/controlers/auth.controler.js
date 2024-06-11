@@ -55,6 +55,7 @@ export const signIn = async (req, res, next) => {
     res
       .status(200)
       .cookie("acesses_token", token, {
+        expires: new Date(Date.now() + 3600000),
         httpOnly: true,
       })
       .json(rest);

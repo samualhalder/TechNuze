@@ -33,9 +33,7 @@ export const getComments = async (req, res, next) => {
 };
 
 export const getAllComments = async (req, res, next) => {
-  console.log("inside this section");
   if (!req.user.isAdmin) {
-    console.log("not allowed");
     return next(errorHandler(401, "you are not allowed."));
   }
   try {
