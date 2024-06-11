@@ -16,6 +16,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser);
   const [comments, setComments] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [openModal, setOpenModal] = useState([false, null]);
@@ -141,9 +142,9 @@ function DashComments() {
           ))}
         </Table>
       ) : (
-        <p>noposts</p>
+        <p>no comments to show.</p>
       )}
-      {showMore && (
+      {showMore && comments.length !== 0 && (
         <Button className="mx-auto mt-3" onClick={handleShowMore}>
           Show more
         </Button>
