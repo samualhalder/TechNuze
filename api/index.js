@@ -41,7 +41,7 @@ app.get("*", (req, res) => {
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
-  const errMessege = err.message || "Interanl server error.";
+  const errMessege = err.message || "Interanl server error";
   res.status(statusCode).json({
     success: false,
     statusCode,
