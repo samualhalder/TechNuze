@@ -15,7 +15,7 @@ function About() {
           className="p-2 bg-gradient-to-r h-40 text-white rounded-lg"
           src={
             theme === "dark"
-              ? "./public/white-transparent.png"
+              ? "white-transparent.png"
               : "../.././public/black-transparent.png"
           }
           alt="logo"
