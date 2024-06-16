@@ -19,8 +19,8 @@ function FooterComp() {
                 className="p-2 bg-gradient-to-r h-20 text-white rounded-lg"
                 src={
                   theme === "dark"
-                    ? `../../public/white-transparent.png`
-                    : "../../public/black-transparent.png"
+                    ? `white-transparent.png`
+                    : "black-transparent.png"
                 }
                 alt="logo"
               />

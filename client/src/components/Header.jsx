@@ -69,8 +69,8 @@ function Header() {
           className=" bg-gradient-to-r h-10 text-white"
           src={
             theme === "dark"
-              ? `../../public/white-transparent.png`
-              : "../../public/black-transparent.png"
+              ? `white-transparent.png`
+              : "black-transparent.png"
           }
           alt="logo"
         />
