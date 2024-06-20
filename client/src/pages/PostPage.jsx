@@ -44,7 +44,7 @@ function PostPage() {
       };
       fetchRecentPosts();
     } catch (error) {
-     // console.log(error);
+      // console.log(error);
     }
   }, []);
 
@@ -56,7 +56,7 @@ function PostPage() {
     );
   else {
     return (
-      <main className="min-h-screen flex flex-col m-4">
+      <div className="min-h-screen flex flex-col m-4">
         <h1 className="text-3xl m-4 mx-auto text-center font-serif mb-8">
           {post && post.title}
         </h1>
@@ -83,7 +83,7 @@ function PostPage() {
               ))}
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }

@@ -14,13 +14,13 @@ export const getAllUsers = async (req, res, next) => {
   }
 
   try {
-    const startIndex = req.query.startInd || 0;
+    const startIndex = req.query.startIndex || 0;
     const limit = req.query.limit || 9;
-    const order = req.query.order || "asc";
+    const order = req.query.order || -1;
     const response = await User.find({})
-      .sort({ createdAt: order })
+      .skip(startIndex)
       .limit(limit)
-      .skip(startIndex);
+      .sort({ createdAt: order });
     const users = response.map((user) => {
       const { password, ...rest } = user._doc;
       return rest;
