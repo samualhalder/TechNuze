@@ -117,7 +117,7 @@ export const signOut = (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
   try {
-    const response = await User.findOne({ userID: req.query.userID });
+    const response = await User.findOne({ _id: req.params.userID });
 
     res.status(200).json(response);
   } catch (error) {

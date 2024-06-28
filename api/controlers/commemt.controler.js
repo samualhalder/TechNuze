@@ -101,13 +101,14 @@ export const editComment = async (req, res, next) => {
 
 export const deleteComment = async (req, res, next) => {
   try {
-    const comment = await Comment.findById(req.params.commentID);
+    const comment = await Comment.findById({ _id: req.params.commentID });
     if (!comment) {
       return next(errorHandler(404, "comment not found."));
     }
-    if (comment.userID != req.user.id || req.user.isAdmin === false) {
+    console.log(comment.userID != req.user.id);
+    if (comment.userID !== req.user.id && !req.user.isAdmin) {
       return next(
-        errorHandler(401, "you are not allowed to delete this commnet.")
+        errorHandler(401, "you are not allowed to delete this commnet buddy.")
       );
     }
     const response = await Comment.findByIdAndDelete(req.params.commentID);
