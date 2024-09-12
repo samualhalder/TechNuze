@@ -24,6 +24,7 @@ function UpdatePost() {
   const [formUplaodError, setFormUplaodError] = useState(null);
   const params = useParams();
   const { postID } = params;
+
   useEffect(() => {
     try {
       const fetchPost = async () => {
@@ -82,9 +83,10 @@ function UpdatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await fetch(
-        `/api/post/update-post/${formData._id}/${currentUser._id}`,
+        `/api/post/update-post/${postID}/${currentUser._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -127,7 +129,7 @@ function UpdatePost() {
               setFormData({ ...formData, category: e.target.value })
             }
           >
-          <option value="">select an option</option>
+            <option value="">select an option</option>
             <option value="startup">Start up</option>
             <option value="mnc">MNC</option>
             <option value="latest-tech">Latest Tech</option>
