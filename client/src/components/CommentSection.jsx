@@ -31,13 +31,13 @@ function CommentSection({ postID }) {
         }),
       });
       const data = await response.json();
-
       if (!response.ok) {
-        setComment(data.errMessage);
+        setError("pls logout and login again there some issue.");
       } else {
-        setComment("");
         setError(null);
+        setAllComments([data, ...allComments]);
       }
+      setComment("");
     } catch (error) {
       setError(error.errMessage);
     }
@@ -109,7 +109,7 @@ function CommentSection({ postID }) {
         console.log(data.errMessage);
       }
     } catch (error) {
-     // console.log(error);
+      // console.log(error);
     }
   };
   useEffect(() => {
@@ -121,12 +121,12 @@ function CommentSection({ postID }) {
         if (response.ok) {
           setAllComments(data);
         } else {
-         // console.log(data.errMessage);
+          // console.log(data.errMessage);
         }
       };
       getComments();
     } catch (error) {
-     // console.log(error);
+      // console.log(error);
     }
   }, [postID]);
 
@@ -171,7 +171,11 @@ function CommentSection({ postID }) {
               <IoMdSend />
             </Button>
           </div>
-          {error && <Alert color="faliure">{error}</Alert>}
+          {error && (
+            <Alert className="my-2" color="red">
+              {error}
+            </Alert>
+          )}
         </form>
       )}
       {allComments.length === 0 ? (
